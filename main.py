@@ -63,19 +63,14 @@ def recover_message(oracle, ct):
         return plaintext
 
 if __name__ == "__main__":
-    # Crear servidor
     server = VulnerableServer()
 
-    # Mensaje original
     original_message = b"Amo el Helado de vainilla"
 
-    # Cifrado
     ciphertext = server.encrypt(original_message)
 
-    # Oracle sin contador
     oracle = lambda data: server.decrypt(data)
 
-    # Oracle con contador
     global_counter = 0
     def oracle_counting(data):
         global global_counter
@@ -88,9 +83,9 @@ if __name__ == "__main__":
     # Resultados
     print("Mensaje original:", original_message)
     print("Mensaje recuperado:", recovered)
-    # print("Total de consultas al oracle:", global_counter)
-    # print("Len original:", len(original_message))
-    # print("Len recuperado:", len(recovered))
+    print("Total de consultas al oracle:", global_counter)
+    print("Len original:", len(original_message))
+    print("Len recuperado:", len(recovered))
     
     ciphertext = server.encrypt(original_message)
     print("Ciphertext (hex):", ciphertext.hex())
